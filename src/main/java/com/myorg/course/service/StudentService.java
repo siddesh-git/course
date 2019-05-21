@@ -23,6 +23,10 @@ public class StudentService {
     @Autowired
     CourseRepository courseRepository;
 
+    public List<Student> get(){
+        return studentRepository.findAll();
+    }
+
     public Set<Course> get(String email){
         Set<Course> courses = new HashSet<>();
         Student student = studentRepository.findByEmail(email);
@@ -37,12 +41,7 @@ public class StudentService {
     }
 
     public Set<Student> findStudents(int courseId){
-        Set<Student> students = studentRepository.findStudents(courseId);
-        Iterator<Student> studentIterator = students.iterator();
-        while(studentIterator.hasNext()){
-            studentIterator.next().getCourses().clear();
-        }
-        return students;
+        return studentRepository.findStudents(courseId);
     }
 
     public Map<Integer, String> register(RegisterRequest registerRequest){
@@ -96,6 +95,9 @@ public class StudentService {
             updateStudentInfo(student);
             studentRepository.save(student);
             course.setAvailableSeats(course.getAvailableSeats()-1);
+            if(course.getAvailableSeats() == 0){
+                course.setStatus(Constants.FULL);
+            }
             course.setLastModifiedTs(new Date());
             courseRepository.save(course);
             result.put(course.getCourseId(), Constants.REGISTERED);
@@ -118,6 +120,9 @@ public class StudentService {
                     studentRepository.save(student1);
                     course.setLastModifiedTs(new Date());
                     course.setAvailableSeats(course.getAvailableSeats()+1);
+                    if(course.getStatus().equals(Constants.FULL)){
+                        course.setStatus(Constants.AVAILABLE);
+                    }
                     courseRepository.save(course);
                     result.put(courseId, Constants.UNREGISTERED);
                 }

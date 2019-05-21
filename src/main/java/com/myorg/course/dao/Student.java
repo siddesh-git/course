@@ -1,30 +1,39 @@
 package com.myorg.course.dao;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table
-
 public class Student implements java.io.Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="student_id")
     private int studentId;
+    @Column
+    @NotBlank(message = "First name can't be blank")
     private String fname;
+    @Column
+    @NotBlank(message = "Last name can't be blank")
     private String lname;
-    @Column(name="email")
+    @Column
+    @Email(message = "Invalid email")
+    @NotBlank(message = "Email can't be blank")
     private String email;
+    @Column
+    @NotBlank(message = "Phone number can't be blank")
     private String phone;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTs = new Date();
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastModifiedTs = new Date();
     private String createBy;
     private String updateBy;
@@ -57,7 +66,7 @@ public class Student implements java.io.Serializable{
     public String getFname() {
         return fname;
     }
-
+    
     public void setFname(String fname) {
         this.fname = fname;
     }
@@ -65,7 +74,7 @@ public class Student implements java.io.Serializable{
     public String getLname() {
         return lname;
     }
-
+    
     public void setLname(String lname) {
         this.lname = lname;
     }
@@ -73,7 +82,7 @@ public class Student implements java.io.Serializable{
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -81,7 +90,7 @@ public class Student implements java.io.Serializable{
     public String getPhone() {
         return phone;
     }
-
+    
     public void setPhone(String phone) {
         this.phone = phone;
     }

@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class ApplicationRunner extends SpringBootServletInitializer {
+public class ApplicationRunner {//extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationRunner.class, args);
     }
@@ -22,8 +22,8 @@ public class ApplicationRunner extends SpringBootServletInitializer {
                 .apis(RequestHandlerSelectors.basePackage("com.myorg.course.controller")).build();
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(ApplicationRunner.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(ApplicationRunner.class);
+//    }
 }

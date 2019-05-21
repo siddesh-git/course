@@ -16,5 +16,7 @@ public interface Constants {
 
     String COURSE_DUE_DATE_AFTER_START_DATE_ERROR = "Due of the course cannot be after start date";
     String COURSE_ADD_SUCCESS = "Course added successfully";
+    String COURSE_DELETE_SUCCESS = "Course deleted successfully";
+    String COURSE_UPDATE_SUCCESS = "Course updated successfully";
     String STUDENT_UPDATE = "Student details added/updated successfully";
 }

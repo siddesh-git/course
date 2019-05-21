@@ -1,10 +1,11 @@
 package com.myorg.course.dao;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.util.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Entity
 @Table
@@ -14,6 +15,8 @@ public class Course implements java.io.Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="course_id")
     private int courseId;
+    @Column
+    @NotBlank(message = "Title can't be blank")
     private String title;
     private String overview;
     private String duration;

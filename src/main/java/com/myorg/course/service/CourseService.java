@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -29,6 +30,19 @@ public class CourseService {
             return Constants.COURSE_ADD_SUCCESS;
         }
 
+    }
+
+    public String delete(int courseId){
+        Optional<Course> course =  courseRepository.findById(courseId);
+        Course courseObj =  course.get();
+        courseObj.setStatus(Constants.NOTAVIALBLE);
+        courseRepository.save(courseObj);
+        return Constants.COURSE_DELETE_SUCCESS;
+    }
+
+    public String update(Course course){
+        courseRepository.save(course);
+        return Constants.COURSE_UPDATE_SUCCESS;
     }
 
 }
