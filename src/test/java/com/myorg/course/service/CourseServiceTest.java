@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -57,6 +58,15 @@ public class CourseServiceTest {
         Mockito.when(courseRepository.save(course)).thenReturn(course);
 
         Assert.assertEquals(courseService.add(course), Constants.COURSE_ADD_SUCCESS);
+    }
+
+    @Test
+    public void courseStatusTest() {
+        Course course = new Course();
+        course.setTitle("Course Testing");
+        Mockito.when(courseRepository.courseStatus("admin@org.com", 1)).thenReturn(course);
+        Course course1 = courseService.courseStatus("admin@org.com", 1);
+        Assert.assertEquals(course1.getTitle(), "Course Testing");
     }
 
 }

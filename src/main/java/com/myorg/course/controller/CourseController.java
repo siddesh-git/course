@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Api(value = "Course information", description = "Api related to course information")
 @Controller
@@ -49,6 +50,14 @@ public class CourseController {
     @RequestMapping(value = "/delete/{courseId}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable("courseId") Integer courseId){
         return ResponseEntity.ok(courseService.delete(courseId));
+    }
+
+    @ApiOperation(value="Returns course status registered by user")
+    @RequestMapping(path="/coursestatus/{email}/{courseId}", method = RequestMethod.GET)
+    public ResponseEntity<Course> courseStatus(@PathVariable("email") String email, @PathVariable("courseId") Integer courseId){
+        Course course = courseService.courseStatus(email, courseId);
+        course.setStatus(Constants.REGISTERED);
+        return ResponseEntity.ok(course);
     }
 
 

@@ -2,6 +2,7 @@ package com.myorg.course.service;
 
 
 import com.myorg.course.dao.Course;
+import com.myorg.course.dao.Student;
 import com.myorg.course.repository.CourseRepository;
 import com.myorg.course.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,6 @@ public class CourseService {
             courseRepository.save(c);
             return Constants.COURSE_ADD_SUCCESS;
         }
-
     }
 
     public String delete(int courseId){
@@ -43,6 +43,11 @@ public class CourseService {
     public String update(Course course){
         courseRepository.save(course);
         return Constants.COURSE_UPDATE_SUCCESS;
+    }
+
+
+    public Course courseStatus(String email, Integer courseId){
+        return courseRepository.courseStatus(email, courseId);
     }
 
 }
