@@ -26,7 +26,6 @@ public class CourseController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ResponseEntity<List<Course>> get(){
         List<Course> couseList = courseService.get();
-        couseList.forEach(System.out::println);
         return ResponseEntity.ok(couseList);
     }
 
