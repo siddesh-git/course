@@ -1,7 +1,7 @@
 package com.myorg.course.service;
 
 
-import com.myorg.course.model.Course;
+import com.myorg.course.dao.Course;
 import com.myorg.course.repository.CourseRepository;
 import com.myorg.course.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;

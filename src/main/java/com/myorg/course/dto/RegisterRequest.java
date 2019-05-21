@@ -1,6 +1,6 @@
-package com.myorg.course.transferobjects;
+package com.myorg.course.dto;
 
-import com.myorg.course.model.Student;
+import com.myorg.course.dao.Student;
 
 public class RegisterRequest {
 

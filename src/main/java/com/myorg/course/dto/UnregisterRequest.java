@@ -1,4 +1,4 @@
-package com.myorg.course.transferobjects;
+package com.myorg.course.dto;
 
 public class UnregisterRequest {
     private String email;

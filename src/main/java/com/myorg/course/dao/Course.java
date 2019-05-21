@@ -1,21 +1,18 @@
-package com.myorg.course.model;
+package com.myorg.course.dao;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import static java.util.TimeZone.getDefault;
+import java.util.*;
 
 @Entity
 @Table
-public class Course {
+public class Course implements java.io.Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="course_id")
     private int courseId;
     private String title;
     private String overview;
@@ -28,6 +25,13 @@ public class Course {
     private Date startDate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dueDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTs = new Date();
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date lastModifiedTs = new Date();
+    private String createBy = "admin";
+    private String updateBy = "admin";
+
 
     public int getCourseId() {
         return courseId;
@@ -109,6 +113,38 @@ public class Course {
         this.dueDate = dueDate;
     }
 
+    public Date getCreateTs() {
+        return createTs;
+    }
+
+    public void setCreateTs(Date createTs) {
+        this.createTs = createTs;
+    }
+
+    public Date getLastModifiedTs() {
+        return lastModifiedTs;
+    }
+
+    public void setLastModifiedTs(Date lastModifiedTs) {
+        this.lastModifiedTs = lastModifiedTs;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -122,6 +158,10 @@ public class Course {
                 ", charges=" + charges +
                 ", startDate=" + startDate +
                 ", dueDate=" + dueDate +
+                ", createTs=" + createTs +
+                ", lastModifiedTs=" + lastModifiedTs +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
                 '}';
     }
 }
